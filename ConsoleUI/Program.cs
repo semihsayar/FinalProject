@@ -1,8 +1,11 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 
-ProductManager productManager = new ProductManager(new InMemoryProductDal());
-foreach (var product in productManager.GetAll())
+// SOLID 
+// O Harfi = Open Closed Principle
+ProductManager productManager = new ProductManager(new EfProductDal());
+foreach (var product in productManager.GetAllByUnitPrice(40,100))
 {
     Console.WriteLine(product.ProductName);
 }
