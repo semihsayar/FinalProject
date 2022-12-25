@@ -4,8 +4,27 @@ using DataAccess.Concrete.InMemory;
 
 // SOLID 
 // O Harfi = Open Closed Principle
-ProductManager productManager = new ProductManager(new EfProductDal());
-foreach (var product in productManager.GetAllByUnitPrice(40,100))
+// IoC
+// DTO = Data Transformation Object
+
+ ProductTest();
+
+// CategoryTest();
+
+static void ProductTest()
 {
-    Console.WriteLine(product.ProductName);
+    ProductManager productManager = new ProductManager(new EfProductDal());
+    foreach (var product in productManager.GetProductDetails())
+    {
+        Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+    }
+}
+
+static void CategoryTest()
+{
+    CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+    foreach (var category in categoryManager.GetAll())
+    {
+        Console.WriteLine("{0} / {1} ", category.CategoryId, category.CategoryName);
+    }
 }
