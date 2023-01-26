@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -24,26 +25,24 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
-            //business codes
-
+            // business codes
             if (product.ProductName.Length<2)
             {
                 // magic strings
                 return new ErrorResult(Messages.ProductNameInvalid);
             }
-             _productDal.Add(product);
-
-              return new SuccessResult(Messages.ProductAdded);
+           
+            _productDal.Add(product);
+            return new SuccessResult(Messages.ProductAdded);
         }
 
         public IDataResult<List<Product>> GetAll()
         {
-            // MaintenanceTime = Bakım Zamanı
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==15)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductListed);
+           return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductListed);
            
         }
 
@@ -54,7 +53,7 @@ namespace Business.Concrete
 
         public IDataResult<Product> GetById(int productId)
         {
-            return new SuccessDataResult<Product> (_productDal.Get(p => p.ProductId == productId));
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
@@ -64,7 +63,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
     }
 }

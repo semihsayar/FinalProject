@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results
 {
-    // Utilities = Araçlar - Araç
     // Temel voidler için başlangıç
     public interface IResult
     {
-        bool Success { get; } // sadece okunabilir
+        bool Success { get; }  // Başarılı mı? Başarısız mı?
         string Message { get; }
     }
 }

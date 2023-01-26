@@ -14,21 +14,22 @@ using DataAccess.Concrete.InMemory;
 static void ProductTest()
 {
     ProductManager productManager = new ProductManager(new EfProductDal());
-    var result = productManager.GetProductDetails();
 
-    if (result.Success==true)
-    {
+         var result = productManager.GetProductDetails();
+
+        if (result.Success)
+       {
         foreach (var product in result.Data )
         {
-            Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+            Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+
         }
     }
-
-    else
+       else
     {
         Console.WriteLine(result.Message);
     }
-
+        
     
 }
 
@@ -40,4 +41,4 @@ static void CategoryTest()
     {
         Console.WriteLine("{0} / {1} ", category.CategoryId, category.CategoryName);
     }
-}
+}  
